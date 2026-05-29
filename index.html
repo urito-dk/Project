@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Интерактивная платформа для изучения неравенств с параметрами — ЕНТ и олимпиады">
+  <title>Неравенства с параметрами</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="site-header glass">
+    <a href="#hero" class="logo">
+      <span class="logo-icon">π</span>
+      <span class="logo-text">Param<span>Ineq</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a href="#theory">Теория</a>
+      <a href="#visualizer">Визуализация</a>
+      <a href="#tasks">Задачи</a>
+      <a href="#practice">Практика</a>
+      <a href="#about">О проекте</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Переключить тему">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="hero-badge">ЕНТ · Олимпиады · 11 класс</p>
+        <h1>Неравенства с параметрами</h1>
+        <p class="hero-subtitle">Интерактивное изучение аналитических и графических методов решения</p>
+        <div class="hero-actions">
+          <a href="#theory" class="btn btn-primary">Начать обучение</a>
+          <a href="#visualizer" class="btn btn-secondary">Попробовать визуализацию</a>
+        </div>
+        <ul class="hero-stats">
+          <li><strong>8</strong> примеров §1.2</li>
+          <li><strong>4</strong> метода решения</li>
+          <li><strong>∞</strong> вариантов параметра</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="theory" class="section theory">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">Раздел 1</span>
+          <h2>Теория</h2>
+          <p>§1.1 — классификация и необходимые знания; §1.2 — простейшие неравенства с параметром.</p>
+        </header>
+        <div id="theory-grid" class="theory-grid">
+          <noscript>
+            <p>Для отображения теории включите JavaScript или откройте сайт через локальный сервер.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section id="visualizer" class="section visualizer">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">Раздел 2</span>
+          <h2>Интерактивная визуализация</h2>
+          <p>Двигайте параметр <em>a</em> и наблюдайте, как меняются график, знаки и решение неравенства.</p>
+        </header>
+        <div class="viz-layout glass">
+          <div class="viz-controls">
+            <label class="field-label" for="viz-preset">Тип неравенства</label>
+            <select id="viz-preset" class="select">
+              <option value="ex7">Пример 7: x² + 2ax + 2a + 3 &gt; 0</option>
+            </select>
+            <div class="param-control">
+              <div class="param-header">
+                <label for="param-slider">Параметр <span class="param-name">a</span></label>
+                <output id="param-value" class="param-value">0</output>
+              </div>
+              <input type="range" id="param-slider" min="-5" max="5" step="0.05" value="0">
+            </div>
+            <div class="viz-legend" id="viz-legend"></div>
+          </div>
+          <div class="viz-main">
+            <canvas id="graph-canvas" width="800" height="480" role="img" aria-label="График функции и область решения"></canvas>
+          </div>
+          <aside class="viz-steps glass-inner" id="viz-steps">
+            <h3>Пошаговое решение</h3>
+            <ol class="steps-list" id="steps-list"></ol>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="tasks" class="section tasks">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">Раздел 3 · §1.2</span>
+          <h2>База задач</h2>
+          <p>Восемь примеров из учебника (примеры 1–8) — с фильтром по сложности и развёрнутым решением.</p>
+        </header>
+        <div class="tasks-toolbar">
+          <div class="filter-group" role="group" aria-label="Уровень сложности">
+            <button type="button" class="filter-btn active" data-difficulty="all">Все</button>
+            <button type="button" class="filter-btn" data-difficulty="easy">Базовый</button>
+            <button type="button" class="filter-btn" data-difficulty="medium">Средний</button>
+            <button type="button" class="filter-btn" data-difficulty="hard">Продвинутый</button>
+          </div>
+        </div>
+        <div id="tasks-grid" class="tasks-grid">
+          <p class="loading-hint">Загрузка задач…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice" class="section practice">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">Раздел 4</span>
+          <h2>Практика</h2>
+          <p>Проверьте понимание: ответы с мгновенной обратной связью и трекинг прогресса.</p>
+        </header>
+        <div class="practice-progress glass">
+          <div class="progress-info">
+            <span>Прогресс</span>
+            <strong id="progress-text">0 / 8</strong>
+          </div>
+          <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+        </div>
+        <div id="practice-list" class="practice-list">
+          <p class="loading-hint">Загрузка практики…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">О проекте</span>
+          <h2>Исследование и технология</h2>
+        </header>
+        <div class="about-grid">
+          <article class="glass about-card">
+            <h3>Цель исследования</h3>
+            <p>Проект посвящён разработке интерактивной веб-среды для изучения неравенств с параметрами и преодолению ограничений стандартных математических программных сред.</p>
+            <p>Платформа связывает аналитический ход решения (ОДЗ, дискриминант, метод интервалов) с динамической графической моделью, чтобы ученик видел причину каждого шага, а не только итоговый ответ.</p>
+          </article>
+          <article class="glass about-card">
+            <h3>GeoGebra и собственная разработка</h3>
+            <ul class="about-list">
+              <li><strong>Ограниченная кастомизация UI</strong> — сложно встроить пошаговый разбор на казахском/русском языке в единый сценарий обучения.</li>
+              <li><strong>Разрыв теории и практики</strong> — конструкция графика и запись аналитического решения часто живут в разных окнах.</li>
+              <li><strong>Зависимость от плагинов</strong> — не всегда удобно на планшетах и в школах с ограниченным ПО.</li>
+            </ul>
+            <p class="about-highlight">Собственный веб-проект даёт полный контроль над визуализацией (Canvas API), адаптивным дизайном, тёмной темой и генерацией шагов решения в реальном времени.</p>
+          </article>
+          <article class="glass about-card tech-card">
+            <h3>Стек</h3>
+            <p>HTML5, CSS3, JavaScript, Canvas API, MathJax. Работает при открытии index.html напрямую — без сборщика и без ES-модулей.</p>
+            <p class="mono">param-inequalities / MIT-style learning UX</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 ParamIneq — образовательная платформа по неравенствам с параметрами</p>
+      <a href="#hero">Наверх</a>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/math.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
